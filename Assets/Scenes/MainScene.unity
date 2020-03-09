@@ -382,7 +382,7 @@ Transform:
   - {fileID: 1038754313}
   - {fileID: 963197041}
   m_Father: {fileID: 595982995}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &190409097
 GameObject:
@@ -801,7 +801,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12.232365
+  orthographic size: 13.846868
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -861,6 +861,8 @@ Transform:
   - {fileID: 1782161668}
   - {fileID: 1427944398}
   - {fileID: 1572659429}
+  - {fileID: 1547236961}
+  - {fileID: 1113539606}
   - {fileID: 169919946}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1613,6 +1615,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!1 &1113539605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1113539606}
+  m_Layer: 0
+  m_Name: EnemyExplosionContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1113539606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113539605}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 595982995}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1226561244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,6 +1872,36 @@ Transform:
   m_Father: {fileID: 595982995}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1547236960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1547236961}
+  m_Layer: 0
+  m_Name: EnemyExplosionPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1547236961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547236960}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 595982995}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1572659428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,6 +1980,7 @@ GameObject:
   - component: {fileID: 1782161671}
   - component: {fileID: 1782161672}
   - component: {fileID: 1782161670}
+  - component: {fileID: 1782161673}
   m_Layer: 0
   m_Name: EnemySwarm
   m_TagString: Untagged
@@ -2013,6 +2076,22 @@ MonoBehaviour:
   - {fileID: 1249370876}
   - {fileID: 1038754313}
   - {fileID: 963197041}
+--- !u!114 &1782161673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782161667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d0608a683cc4b4b83efa3a9e6916d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: -2397976632742935267, guid: 920908b2ea2e25a408465a23f6181500,
+    type: 3}
+  _pool: {fileID: 1547236961}
+  _container: {fileID: 1113539606}
 --- !u!1 &1925892500
 GameObject:
   m_ObjectHideFlags: 0
@@ -2139,8 +2218,8 @@ RectTransform:
   m_Father: {fileID: 352378330}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.091248274}
-  m_AnchorMax: {x: 1, y: 0.9087517}
+  m_AnchorMin: {x: 0, y: 0.13890749}
+  m_AnchorMax: {x: 1, y: 0.8610925}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

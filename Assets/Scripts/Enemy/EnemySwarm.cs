@@ -12,6 +12,7 @@ public class EnemySwarm : EnemyGrid
 
     private MissileHandler _missileHandler = default;
     private EnemiesHandler _enemiesHandler = default;
+    private EnemyExplosionHandler _explosionHandler = default;
 
     private Enemy[] _array = default;
     private Vector2Int _arrayOffset = default;
@@ -27,6 +28,7 @@ public class EnemySwarm : EnemyGrid
     public void Initialize()
     {
         _missileHandler = GetComponent<MissileHandler>();
+        _explosionHandler = GetComponent<EnemyExplosionHandler>();
         _enemiesHandler = GetComponent<EnemiesHandler>();
         _enemiesHandler.Initialize(_grid);
     }
@@ -177,6 +179,8 @@ public class EnemySwarm : EnemyGrid
 
         _missileHandler.ClearContainer();
         _enemiesHandler.ClearContainers();
+        _explosionHandler.ClearContainer();
+
         _enemiesHandler.FillEnemyGrid(this, _array, _arrayOffset, _colsCount, _rowsCount, !isNextLevel);
 
         _velocity = new Vector2(_horizontalSpeed, 0f);
@@ -193,7 +197,7 @@ public class EnemySwarm : EnemyGrid
         {
             //Debug.Log(GetType() + ".OnPlayerMissileUpdate: " + enemy.Sprite.bounds.ToString("f2") + " " + missile.Collider.bounds.ToString("f2"));
             //Debug.Log(GetType() + ".OnPlayerMissileUpdate: " + missile.Collider.bounds.Intersects(enemy.Sprite.bounds));
-            enemy.OnHitByMissile(missile, out bool enemyDestoyed);
+            enemy.OnHitByMissile(missile, _explosionHandler, out bool enemyDestoyed);
             missile.OnHit();
             if (enemyDestoyed)
             {

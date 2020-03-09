@@ -81,12 +81,13 @@ public class Enemy : MonoBehaviour
         return enemy;
     }
 
-    public void OnHitByMissile(PlayerMissile missile, out bool destroyed)
+    public void OnHitByMissile(PlayerMissile missile, EnemyExplosionHandler _explosionHandler, out bool destroyed)
     {
         _currentHP = Mathf.Max(0, _currentHP - missile.DamageHP);
         destroyed = _currentHP <= 0;
         if (destroyed)
         {
+            _explosionHandler.StartExplosion(transform.position, _missileLauncher.MissileColor);
             _missileLauncher.StopShooting();
             _currentHP = _healthPoints;
             transform.SetParent(_pool, false);

@@ -8,6 +8,8 @@ public class MissileLauncher : MonoBehaviour
     [SerializeField]
     private Color _missileColor = Color.white;
 
+    public Color MissileColor { get => _missileColor; }
+
     private void Awake()
     {
         transform.DestroyAllChildren();

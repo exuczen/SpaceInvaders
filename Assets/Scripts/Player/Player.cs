@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     {
         _missileHandler = GetComponent<MissileHandler>();
         _sprite = GetComponent<SpriteRenderer>();
-        _explosion = _explosionPrefab.Create(transform.position, transform.parent);
+        _explosion = _explosionPrefab.Create<PlayerExplosion>(transform.position, transform.parent);
         _explosion.gameObject.SetActive(false);
     }
 
@@ -72,7 +72,6 @@ public class Player : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 _explosion.Play(transform.position);
-                GameManager.Instance.StartFailRoutine();
             }
         }
     }
