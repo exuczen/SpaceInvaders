@@ -94,6 +94,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void ResetMutableParams()
+    {
+        _currentHP = _healthPoints;
+    }
+
     public void SaveParamsToJson()
     {
         EnemyParams.SaveToJson(this);

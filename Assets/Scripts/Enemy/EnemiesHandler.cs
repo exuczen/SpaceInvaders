@@ -57,7 +57,9 @@ public class EnemiesHandler : MonoBehaviour
         {
             FillEnemyPool(poolIndex, POOL_DELTA_CAPACITY);
         }
-        return enemyPool.GetChild(enemyPool.childCount - 1).GetComponent<Enemy>();
+        Enemy enemy = enemyPool.GetChild(enemyPool.childCount - 1).GetComponent<Enemy>();
+        enemy.ResetMutableParams();
+        return enemy;
     }
 
     private void FillEnemyPool(int poolIndex, int enemyCount)

@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
     {
         _gameCanvas.GameScreen.SetLevelText(_level);
         _enemySwarm.Initialize();
-        _enemySwarm.Restart(false, _level, false);
+        _enemySwarm.ResetSwarm(true, _level);
         SetGameActive(false);
         _gameCanvas.AlertPopup.ShowWithConfirmButton("Start the game!", () => {
             SetGameActive(true);
@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager>
         SetGameActive(false);
         yield return new WaitForEndOfFrame();
         _gameCanvas.ShowFailPopup(() => {
-            _enemySwarm.Restart(true, _level, false);
+            _enemySwarm.ResetSwarm(false, _level);
             _player.Restart();
             SetGameActive(true);
         });
@@ -59,7 +59,7 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForEndOfFrame();
         _gameCanvas.ShowSuccessPopup(() => {
             _level++;
-            _enemySwarm.Restart(false, _level, false);
+            _enemySwarm.ResetSwarm(true, _level);
             _player.Restart();
             _gameCanvas.GameScreen.SetLevelText(_level);
             SetGameActive(true);

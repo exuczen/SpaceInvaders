@@ -164,26 +164,24 @@ public class EnemySwarm : EnemyGrid
         }
     }
 
-    public void Restart(bool reset, int level, bool startShooting)
+    public void ResetSwarm(bool isNextLevel, int level)
     {
-        if (reset)
+        if (isNextLevel)
         {
-            ClearArray();
+            CreateArray(level);
         }
         else
         {
-            CreateArray(level);
+            ClearArray();
         }
 
         _missileHandler.ClearContainer();
         _enemiesHandler.ClearContainers();
-        _enemiesHandler.FillEnemyGrid(this, _array, _arrayOffset, _colsCount, _rowsCount, reset);
+        _enemiesHandler.FillEnemyGrid(this, _array, _arrayOffset, _colsCount, _rowsCount, !isNextLevel);
 
         _velocity = new Vector2(_horizontalSpeed, 0f);
 
         transform.localPosition = Vector3.zero;
-
-        StartShooting();
     }
 
     public void OnPlayerMissileUpdate(PlayerMissile missile)
