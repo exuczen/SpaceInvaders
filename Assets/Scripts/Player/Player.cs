@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerExplosion _explosionPrefab = default;
     [SerializeField]
+    private HitParticles _hitParticlesPrefab = default;
+    [SerializeField]
     private int _healthPoints = default;
     [SerializeField]
     private float _missileSpeed = default;
@@ -26,6 +28,8 @@ public class Player : MonoBehaviour
 
     private PlayerExplosion _explosion = default;
 
+    private HitParticles _hitParticles = default;
+
     public Action<int> setPlayerHeathText = default;
 
     public MissileHandler MissileHandler { get => _missileHandler; }
@@ -36,7 +40,9 @@ public class Player : MonoBehaviour
         _missileHandler = GetComponent<MissileHandler>();
         _sprite = GetComponent<SpriteRenderer>();
         _explosion = _explosionPrefab.Create<PlayerExplosion>(transform.position, transform.parent);
+        _hitParticles = _hitParticlesPrefab.Create<HitParticles>(transform.position, transform.parent);
         _explosion.gameObject.SetActive(false);
+        _hitParticles.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -72,6 +78,10 @@ public class Player : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 _explosion.Play(transform.position);
+            }
+            else
+            {
+                _hitParticles.Play((collision.transform.position + transform.position) / 2f);
             }
         }
     }

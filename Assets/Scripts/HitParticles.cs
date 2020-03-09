@@ -33,4 +33,13 @@ public class HitParticles : MonoBehaviour
         ParticleSystem.MainModule mainModule = GetComponent<ParticleSystem>().main;
         mainModule.startColor = color;
     }
+
+    protected virtual void OnParticleSystemStopped()
+    {
+        gameObject.SetActive(false);
+        if (_pool)
+        {
+            transform.SetParent(_pool, false);
+        }
+    }
 }

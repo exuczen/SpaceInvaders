@@ -1099,6 +1099,8 @@ MonoBehaviour:
   _missileLauncher: {fileID: 1925892502}
   _explosionPrefab: {fileID: -7549872503576405840, guid: 3c06ac88010866346af23a527fd421be,
     type: 3}
+  _hitParticlesPrefab: {fileID: -6799757485378685444, guid: 47b163c71a6a33546b0ed7e45cc40bdf,
+    type: 3}
   _healthPoints: 3
   _missileSpeed: 20
   _missileDamageHP: 1

@@ -2,7 +2,7 @@
 
 public class PlayerExplosion : HitParticles
 {
-    private void OnParticleSystemStopped()
+    protected override void OnParticleSystemStopped()
     {
         gameObject.SetActive(false);
         GameManager.Instance.StartFailRoutine();
