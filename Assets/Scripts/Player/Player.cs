@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private MissileLauncher _missileLauncher = default;
     [SerializeField]
+    private PlayerExplosion _explosionPrefab = default;
+    [SerializeField]
     private int _healthPoints = default;
     [SerializeField]
     private float _missileSpeed = default;
@@ -22,7 +24,10 @@ public class Player : MonoBehaviour
 
     private SpriteRenderer _sprite = default;
 
+    private PlayerExplosion _explosion = default;
+
     public Action<int> setPlayerHeathText = default;
+
     public MissileHandler MissileHandler { get => _missileHandler; }
     public Vector2 ViewSize { get => _viewSize; set => _viewSize = value; }
 
@@ -30,6 +35,8 @@ public class Player : MonoBehaviour
     {
         _missileHandler = GetComponent<MissileHandler>();
         _sprite = GetComponent<SpriteRenderer>();
+        _explosion = _explosionPrefab.Create(transform.position, transform.parent);
+        _explosion.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -63,6 +70,8 @@ public class Player : MonoBehaviour
             missile.OnHit();
             if (_currentHP <= 0)
             {
+                gameObject.SetActive(false);
+                _explosion.Play(transform.position);
                 GameManager.Instance.StartFailRoutine();
             }
         }
@@ -70,9 +79,11 @@ public class Player : MonoBehaviour
 
     public void Restart()
     {
+        gameObject.SetActive(true);
+        transform.localPosition = Vector3.zero;
+
         _missileHandler.ClearContainer();
 
-        transform.localPosition = Vector3.zero;
         SetCurrentHP(_healthPoints);
     }
 

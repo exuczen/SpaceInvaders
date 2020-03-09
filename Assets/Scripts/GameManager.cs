@@ -50,7 +50,6 @@ public class GameManager : Singleton<GameManager>
             _player.Restart();
             SetGameActive(true);
         });
-        yield break;
     }
 
     private IEnumerator SuccessRoutine()
