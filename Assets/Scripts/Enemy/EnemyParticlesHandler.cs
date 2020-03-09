@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyExplosionHandler : ObjectPoolHandler<EnemyExplosion>
+public class EnemyParticlesHandler : ObjectPoolHandler<HitParticles>
 {
     public void StartExplosion(Vector3 position, Color color)
     {
-        EnemyExplosion explosion = GetObjectFromPool();
+        HitParticles explosion = GetObjectFromPool();
         explosion.transform.SetParent(_container);
         explosion.SetColor(color);
         explosion.Play(position);
@@ -16,7 +16,7 @@ public class EnemyExplosionHandler : ObjectPoolHandler<EnemyExplosion>
     {
         for (int i = 0; i < count; i++)
         {
-            _prefab.CreateInPool<EnemyExplosion>(_pool);
+            _prefab.CreateInPool<HitParticles>(_pool);
         }
     }
 }

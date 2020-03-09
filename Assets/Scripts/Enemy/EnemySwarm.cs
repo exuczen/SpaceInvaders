@@ -12,7 +12,7 @@ public class EnemySwarm : EnemyGrid
 
     private MissileHandler _missileHandler = default;
     private EnemiesHandler _enemiesHandler = default;
-    private EnemyExplosionHandler _explosionHandler = default;
+    private EnemyParticlesHandler _explosionHandler = default;
 
     private Enemy[] _array = default;
     private Vector2Int _arrayOffset = default;
@@ -28,7 +28,7 @@ public class EnemySwarm : EnemyGrid
     public void Initialize()
     {
         _missileHandler = GetComponent<MissileHandler>();
-        _explosionHandler = GetComponent<EnemyExplosionHandler>();
+        _explosionHandler = GetComponent<EnemyParticlesHandler>();
         _enemiesHandler = GetComponent<EnemiesHandler>();
         _enemiesHandler.Initialize(_grid);
     }

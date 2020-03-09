@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6517130160959869332}
   - component: {fileID: 6517130160959869330}
   - component: {fileID: 6517130160959869329}
-  - component: {fileID: -2397976632742935267}
+  - component: {fileID: 3609802905625896310}
   m_Layer: 0
   m_Name: EnemyExplosion
   m_TagString: Untagged
@@ -4812,7 +4812,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &-2397976632742935267
+--- !u!114 &3609802905625896310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4821,6 +4821,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6517130160959869333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 129923ca893e4db4582fcc4eb8888d17, type: 3}
+  m_Script: {fileID: 11500000, guid: f87077590980f594b8669e1959fc227a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

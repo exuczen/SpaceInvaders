@@ -801,7 +801,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 13.846868
+  orthographic size: 13.656751
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2031,7 +2031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0ffd48e57cbce4486a7dc6282987fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 4329574835403228478, guid: d7b6dc937a6c5164c98a16b747918017, type: 3}
+  _prefab: {fileID: 1399591482312537483, guid: d7b6dc937a6c5164c98a16b747918017, type: 3}
   _pool: {fileID: 1427944398}
   _container: {fileID: 1572659429}
 --- !u!114 &1782161671
@@ -2090,8 +2090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d0608a683cc4b4b83efa3a9e6916d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: -2397976632742935267, guid: 920908b2ea2e25a408465a23f6181500,
-    type: 3}
+  _prefab: {fileID: 3609802905625896310, guid: 920908b2ea2e25a408465a23f6181500, type: 3}
   _pool: {fileID: 1547236961}
   _container: {fileID: 1113539606}
 --- !u!1 &1925892500
@@ -2220,8 +2219,8 @@ RectTransform:
   m_Father: {fileID: 352378330}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.13890749}
-  m_AnchorMax: {x: 1, y: 0.8610925}
+  m_AnchorMin: {x: 0, y: 0.1338807}
+  m_AnchorMax: {x: 1, y: 0.86611927}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
