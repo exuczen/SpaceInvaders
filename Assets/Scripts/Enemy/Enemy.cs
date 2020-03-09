@@ -81,17 +81,21 @@ public class Enemy : MonoBehaviour
         return enemy;
     }
 
-    public void OnHitByMissile(PlayerMissile missile, EnemyParticlesHandler _explosionHandler, out bool destroyed)
+    public void OnHitByMissile(PlayerMissile missile, EnemyParticlesHandler _particlesHandler, out bool destroyed)
     {
         _currentHP = Mathf.Max(0, _currentHP - missile.DamageHP);
         destroyed = _currentHP <= 0;
         if (destroyed)
         {
-            _explosionHandler.StartExplosion(transform.position, _missileLauncher.MissileColor);
+            _particlesHandler.StartExplosion(transform.position, _missileLauncher.MissileColor);
             _missileLauncher.StopShooting();
             _currentHP = _healthPoints;
             transform.SetParent(_pool, false);
             transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            _particlesHandler.StartHitParticles(transform.position, _missileLauncher.MissileColor);
         }
     }
 

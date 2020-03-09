@@ -7,10 +7,13 @@ public class HitParticles : MonoBehaviour
 {
     protected Transform _pool = default;
 
+    private Vector3 _initialScale = default;
+
     public T CreateInPool<T>(Transform pool) where T : HitParticles
     {
         T hitParticles = Instantiate(this as T, pool);
         hitParticles._pool = pool;
+        hitParticles._initialScale = hitParticles.transform.localScale;
         return hitParticles;
     }
 
@@ -18,6 +21,7 @@ public class HitParticles : MonoBehaviour
     {
         T hitParticles = Instantiate(this as T, parent);
         hitParticles.transform.position = position;
+        hitParticles._initialScale = hitParticles.transform.localScale;
         return hitParticles;
     }
 
@@ -26,6 +30,14 @@ public class HitParticles : MonoBehaviour
         transform.position = position;
         gameObject.SetActive(true);
         GetComponent<ParticleSystem>().Play();
+    }
+
+    public void Set(Transform parent, Vector3 position, Color color, float scaleFactor)
+    {
+        SetColor(color);
+        transform.SetParent(parent);
+        transform.position = position;
+        transform.localScale = scaleFactor * _initialScale;
     }
 
     public void SetColor(Color color)
@@ -39,6 +51,7 @@ public class HitParticles : MonoBehaviour
         gameObject.SetActive(false);
         if (_pool)
         {
+            transform.localScale = _initialScale;
             transform.SetParent(_pool, false);
         }
     }
