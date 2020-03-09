@@ -8,12 +8,12 @@ public class PlayerMissileHandler : MissileHandler
     [SerializeField]
     private EnemySwarm _enemySwarm = default;
 
-    protected override void FillMissilePool(int count)
+    protected override void FillPool(int count)
     {
-        PlayerMissile prefab = _missilePrefab as PlayerMissile;
+        PlayerMissile prefab = _prefab as PlayerMissile;
         for (int i = 0; i < count; i++)
         {
-            prefab.Create(_missilePool, _enemySwarm);
+            prefab.Create(_pool, _enemySwarm);
         }
     }
 }

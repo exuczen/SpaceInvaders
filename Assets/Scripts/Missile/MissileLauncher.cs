@@ -15,8 +15,8 @@ public class MissileLauncher : MonoBehaviour
 
     public void Shoot(MissileHandler _handler, float speed, int damageHP)
     {
-        Missile missile = _handler.GetMissileFromPool();
+        Missile missile = _handler.GetObjectFromPool();
         missile.SetSpriteColor(_missileColor);
-        missile.Launch(_handler.MissileContainer, transform.position, speed, damageHP);
+        missile.Launch(_handler.Container, transform.position, speed, damageHP);
     }
 }

@@ -801,7 +801,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.117647
+  orthographic size: 11.253113
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -940,6 +940,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212593101, guid: be7b8c9ae4db5364ca2c6d19a5a0a571, type: 3}
       propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212593101, guid: be7b8c9ae4db5364ca2c6d19a5a0a571, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212593101, guid: be7b8c9ae4db5364ca2c6d19a5a0a571, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1394730443796996118, guid: be7b8c9ae4db5364ca2c6d19a5a0a571,
@@ -1194,10 +1202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75427382f65a0e40842d0d871b14b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _missilePrefab: {fileID: -8933464364138710671, guid: c58487db6973f58428935c1fa5ecbb34,
+  _prefab: {fileID: -8933464364138710671, guid: c58487db6973f58428935c1fa5ecbb34,
     type: 3}
-  _missilePool: {fileID: 49544064}
-  _missileContainer: {fileID: 748802435}
+  _pool: {fileID: 49544064}
+  _container: {fileID: 748802435}
   _enemySwarm: {fileID: 1782161671}
 --- !u!1 &748802434
 GameObject:
@@ -1956,10 +1964,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0ffd48e57cbce4486a7dc6282987fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _missilePrefab: {fileID: 4329574835403228478, guid: d7b6dc937a6c5164c98a16b747918017,
-    type: 3}
-  _missilePool: {fileID: 1427944398}
-  _missileContainer: {fileID: 1572659429}
+  _prefab: {fileID: 4329574835403228478, guid: d7b6dc937a6c5164c98a16b747918017, type: 3}
+  _pool: {fileID: 1427944398}
+  _container: {fileID: 1572659429}
 --- !u!114 &1782161671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2130,8 +2137,8 @@ RectTransform:
   m_Father: {fileID: 352378330}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.0058139563}
-  m_AnchorMax: {x: 1, y: 0.99418604}
+  m_AnchorMin: {x: 0, y: 0.055678487}
+  m_AnchorMax: {x: 1, y: 0.9443215}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
