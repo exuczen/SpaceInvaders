@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
 
     public void StartShooting(MissileHandler handler, float shotIntervalFactor)
     {
-        _missileLauncher.StartShooting(handler, shotIntervalFactor, _shotIntevalMin, _shotIntevalMax, _missileSpeed, _missileDamageHP);
+        _missileLauncher.StartShooting(handler, this, shotIntervalFactor);
     }
 
     public void StopShooting()

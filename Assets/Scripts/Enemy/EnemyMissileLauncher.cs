@@ -7,10 +7,10 @@ public class EnemyMissileLauncher : MissileLauncher
 {
     private Coroutine _shootingRoutine = default;
 
-    public void StartShooting(MissileHandler handler, float intervalScale, float intervalMin, float intervalMax, float speed, int damageHP)
+    public void StartShooting(MissileHandler handler, Enemy enemy, float intervalScale)
     {
         StopShooting();
-        _shootingRoutine = StartCoroutine(ShootingRoutine(handler, intervalScale, intervalMin, intervalMax, speed, damageHP));
+        _shootingRoutine = StartCoroutine(ShootingRoutine(handler, enemy, intervalScale));
     }
 
     public void StopShooting()
@@ -22,13 +22,13 @@ public class EnemyMissileLauncher : MissileLauncher
         }
     }
 
-    private IEnumerator ShootingRoutine(MissileHandler handler, float intervalScale, float intervalMin, float intervalMax, float speed, int damageHP)
+    private IEnumerator ShootingRoutine(MissileHandler handler, Enemy enemy, float intervalScale)
     {
-        yield return new WaitForSeconds(intervalScale * Random.Range(0f, intervalMax));
+        yield return new WaitForSeconds(intervalScale * Random.Range(0f, enemy.ShotIntevalMax));
         while (true)
         {
-            Shoot(handler, -Mathf.Abs(speed), damageHP);
-            yield return new WaitForSeconds(intervalScale * Random.Range(intervalMin, intervalMax));
+            Shoot(handler, -Mathf.Abs(enemy.MissileSpeed), enemy.MissileDamageHP);
+            yield return new WaitForSeconds(intervalScale * Random.Range(enemy.ShotIntevalMin, enemy.ShotIntevalMax));
         }
     }
 }
