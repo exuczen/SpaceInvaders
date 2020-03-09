@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
 
     public void InitGame()
     {
+        _gameCanvas.AlertPopup.SetQuitWarningActions(() => { SetGameActive(false); }, () => { SetGameActive(true); });
         _gameCanvas.GameScreen.SetLevelText(_level);
         _enemySwarm.Initialize();
         _enemySwarm.ResetSwarm(true, _level);
