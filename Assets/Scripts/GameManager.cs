@@ -28,9 +28,6 @@ public class GameManager : Singleton<GameManager>
         _enemySwarm.Initialize();
         _enemySwarm.ResetSwarm(true, _level);
         SetGameActive(false);
-        _gameCanvas.AlertPopup.ShowWithConfirmButton("Start the game!", () => {
-            SetGameActive(true);
-        });
     }
 
     public void PauseGame(Action onResume)

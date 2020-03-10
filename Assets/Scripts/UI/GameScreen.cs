@@ -38,6 +38,8 @@ public class GameScreen : ScreenScript
 
     protected override void OnShow()
     {
-        GameManager.Instance.InitGame();
+        Canvas.AlertPopup.ShowWithConfirmButton("Start the game!", () => {
+            GameManager.Instance.SetGameActive(true);
+        });
     }
 }
