@@ -44,7 +44,7 @@ public abstract class ObjectPoolHandler<T> : MonoBehaviour where T : MonoBehavio
         }
         foreach (Transform child in children)
         {
-            child.SetParent(_pool);
+            child.SetParent(_pool, false);
             child.gameObject.SetActive(false);
         }
     }

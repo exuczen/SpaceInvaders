@@ -49,6 +49,7 @@ public class Missile : MonoBehaviour
     {
         _rigidbody.velocity = Vector2.zero;
         transform.SetParent(_pool, false);
+        gameObject.SetActive(false);
     }
 
     private void OnDisable()

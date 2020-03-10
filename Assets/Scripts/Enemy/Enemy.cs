@@ -124,8 +124,8 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            SaveParamsToJson();
             Debug.LogWarning(GetType() + ".LoadParamsFromJson: " + EnemyParams.GetPath(name) + " does not exists.");
+            SaveParamsToJson();
         }
     }
 }

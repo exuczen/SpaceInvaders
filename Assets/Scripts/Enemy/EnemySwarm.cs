@@ -192,11 +192,8 @@ public class EnemySwarm : EnemyGrid
     {
         Vector2Int cell = (Vector2Int)_grid.WorldToCell(missile.transform.position);
         Enemy enemy = GetEnemyAtCell(cell, out Vector2Int xy);
-        //Debug.Log(GetType() + ".OnPlayerMissileUpdate: " + collider.bounds.ToString("f2"));
         if (enemy && missile.Collider.bounds.Intersects(enemy.Sprite.bounds))
         {
-            //Debug.Log(GetType() + ".OnPlayerMissileUpdate: " + enemy.Sprite.bounds.ToString("f2") + " " + missile.Collider.bounds.ToString("f2"));
-            //Debug.Log(GetType() + ".OnPlayerMissileUpdate: " + missile.Collider.bounds.Intersects(enemy.Sprite.bounds));
             enemy.OnHitByMissile(missile, _explosionHandler, out bool enemyDestoyed);
             missile.OnHit();
             if (enemyDestoyed)
@@ -218,8 +215,6 @@ public class EnemySwarm : EnemyGrid
                     }
                     if (enemyBelow)
                     {
-                        //Debug.Log(GetType() + ".enemyBelow: " + x + " " + y);
-                        //Debug.Log(GetType() + ".GetNonEmptyEnemyColumnsCount()=" + GetNonEmptyEnemyColumnsCount());
                         float shotIntervalFactor = 1f * GetNonEmptyEnemyColumnsCount() / _colsCount;
                         enemyBelow.StartShooting(_missileHandler, shotIntervalFactor);
                     }

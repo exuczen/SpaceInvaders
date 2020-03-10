@@ -133,7 +133,7 @@ public class EnemiesHandler : MonoBehaviour
             }
             foreach (Transform child in children)
             {
-                child.SetParent(pool);
+                child.SetParent(pool, false);
             }
         }
     }

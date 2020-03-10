@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class EnemyParticlesHandler : ObjectPoolHandler<HitParticles>
 {
-    public void StartHitParticles(Vector3 position, Color color)
+    private void StartHitParticles(Vector3 position, Color color, float scaleFactor)
     {
         HitParticles explosion = GetObjectFromPool();
-        explosion.Set(_container, position, color, 0.7f);
+        explosion.Set(_container, position, color, scaleFactor);
         explosion.Play(position);
+    }
+
+    public void StartHitParticles(Vector3 position, Color color)
+    {
+        StartHitParticles(position, color, 0.7f);
     }
 
     public void StartExplosion(Vector3 position, Color color)
     {
-        HitParticles explosion = GetObjectFromPool();
-        explosion.Set(_container, position, color, 1f);
-        explosion.Play(position);
+        StartHitParticles(position, color, 1f);
     }
 
     protected override void FillPool(int count)
