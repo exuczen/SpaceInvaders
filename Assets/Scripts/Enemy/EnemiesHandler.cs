@@ -53,12 +53,15 @@ public class EnemiesHandler : MonoBehaviour
     private Enemy GetEnemyFromPool(int poolIndex)
     {
         Transform enemyPool = _pools[poolIndex];
+        Transform container = _containers[poolIndex];
         if (enemyPool.childCount == 0)
         {
             FillEnemyPool(poolIndex, POOL_DELTA_CAPACITY);
         }
         Enemy enemy = enemyPool.GetChild(enemyPool.childCount - 1).GetComponent<Enemy>();
         enemy.ResetMutableParams();
+        enemy.transform.SetParent(container, false);
+        enemy.gameObject.SetActive(true);
         return enemy;
     }
 
@@ -89,7 +92,7 @@ public class EnemiesHandler : MonoBehaviour
                 for (int x = 0; x < colsCount; x++)
                 {
                     Enemy enemy = GetEnemyFromPool(prefabI);
-                    enemy.SetCellPositionInParent(enemyGrid, container, new Vector2Int(x - arrayOffset.x, arrayOffset.y - yWithOffset));
+                    enemy.SetCellPosition(enemyGrid, new Vector2Int(x - arrayOffset.x, arrayOffset.y - yWithOffset));
                     array[x + rowOffset] = enemy;
                 }
                 rowOffset += colsCount;
@@ -134,6 +137,7 @@ public class EnemiesHandler : MonoBehaviour
             foreach (Transform child in children)
             {
                 child.SetParent(pool, false);
+                child.gameObject.SetActive(false);
             }
         }
     }

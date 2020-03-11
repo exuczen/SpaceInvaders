@@ -31,6 +31,7 @@ public abstract class ObjectPoolHandler<T> : MonoBehaviour where T : MonoBehavio
             FillPool(POOL_DELTA_CAPACITY);
         }
         T child = _pool.GetChild(_pool.childCount - 1).GetComponent<T>();
+        child.transform.SetParent(_container, false);
         child.gameObject.SetActive(true);
         return child;
     }

@@ -35,10 +35,8 @@ public class Missile : MonoBehaviour
         _sprite.color = color;
     }
 
-    public void Launch(Transform parent, Vector3 worldPos, float speed, int damageHP)
+    public void Launch(Vector3 worldPos, float speed, int damageHP)
     {
-        gameObject.SetActive(true);
-        transform.SetParent(parent, false);
         transform.position = worldPos;
         _damageHP = damageHP;
         _rigidbody.simulated = true;

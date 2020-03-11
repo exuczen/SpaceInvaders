@@ -32,10 +32,9 @@ public class HitParticles : MonoBehaviour
         GetComponent<ParticleSystem>().Play();
     }
 
-    public void Set(Transform parent, Vector3 position, Color color, float scaleFactor)
+    public void Set(Vector3 position, Color color, float scaleFactor)
     {
         SetColor(color);
-        transform.SetParent(parent);
         transform.position = position;
         transform.localScale = scaleFactor * _initialScale;
     }

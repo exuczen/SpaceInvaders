@@ -68,9 +68,8 @@ public class Enemy : MonoBehaviour
         return normalizedSize * scale;
     }
 
-    public void SetCellPositionInParent(EnemyGrid grid, Transform parent, Vector2Int cell)
+    public void SetCellPosition(EnemyGrid grid, Vector2Int cell)
     {
-        transform.SetParent(parent);
         transform.position = grid.GetCellWorldPosition(cell);
     }
 
