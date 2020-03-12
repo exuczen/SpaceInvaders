@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Missile : MonoBehaviour
+public class Missile : PoolObject
 {
     private int _damageHP = default;
 
-    protected Transform _pool = default;
     private Rigidbody2D _rigidbody = default;
     private BoxCollider2D _collider = default;
     private SpriteRenderer _sprite = default;
@@ -45,9 +44,7 @@ public class Missile : MonoBehaviour
 
     public void OnHit()
     {
-        _rigidbody.velocity = Vector2.zero;
-        transform.SetParent(_pool, false);
-        gameObject.SetActive(false);
+        MoveToPool();
     }
 
     private void OnDisable()
@@ -64,5 +61,10 @@ public class Missile : MonoBehaviour
         {
             OnHit();
         }
+    }
+
+    protected override void OnMoveToPool()
+    {
+        _rigidbody.velocity = Vector2.zero;
     }
 }

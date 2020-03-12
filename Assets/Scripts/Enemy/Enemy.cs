@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : PoolObject
 {
     [SerializeField]
     private EnemyMissileLauncher _missileLauncher = default;
@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
     private float _shotIntevalMax = default;
 
     private SpriteRenderer _sprite = null;
-    private Transform _pool = default;
 
     private int _currentHP = default;
 
@@ -88,19 +87,12 @@ public class Enemy : MonoBehaviour
         {
             _particlesHandler.StartExplosion(transform.position, _missileLauncher.MissileColor);
             _missileLauncher.StopShooting();
-            _currentHP = _healthPoints;
-            transform.SetParent(_pool, false);
-            transform.localPosition = Vector3.zero;
+            MoveToPool();
         }
         else
         {
             _particlesHandler.StartHitParticles(transform.position, _missileLauncher.MissileColor);
         }
-    }
-
-    public void ResetMutableParams()
-    {
-        _currentHP = _healthPoints;
     }
 
     public void SaveParamsToJson()
@@ -126,5 +118,10 @@ public class Enemy : MonoBehaviour
             Debug.LogWarning(GetType() + ".LoadParamsFromJson: " + EnemyParams.GetPath(name) + " does not exists.");
             SaveParamsToJson();
         }
+    }
+
+    protected override void OnMoveToPool()
+    {
+        _currentHP = _healthPoints;
     }
 }

@@ -59,7 +59,6 @@ public class EnemiesHandler : MonoBehaviour
             FillEnemyPool(poolIndex, POOL_DELTA_CAPACITY);
         }
         Enemy enemy = enemyPool.GetChild(enemyPool.childCount - 1).GetComponent<Enemy>();
-        enemy.ResetMutableParams();
         enemy.transform.SetParent(container, false);
         enemy.gameObject.SetActive(true);
         return enemy;
@@ -136,8 +135,7 @@ public class EnemiesHandler : MonoBehaviour
             }
             foreach (Transform child in children)
             {
-                child.SetParent(pool, false);
-                child.gameObject.SetActive(false);
+                child.GetComponent<Enemy>().MoveToPool(pool);
             }
         }
     }

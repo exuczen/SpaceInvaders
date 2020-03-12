@@ -39,8 +39,8 @@ public class Player : MonoBehaviour
     {
         _missileHandler = GetComponent<MissileHandler>();
         _sprite = GetComponent<SpriteRenderer>();
-        _explosion = _explosionPrefab.Create<PlayerExplosion>(transform.position, transform.parent);
-        _hitParticles = _hitParticlesPrefab.Create<HitParticles>(transform.position, transform.parent);
+        _explosion = _explosionPrefab.Create<PlayerExplosion>(transform.parent);
+        _hitParticles = _hitParticlesPrefab.Create<HitParticles>(transform.parent);
         _explosion.gameObject.SetActive(false);
         _hitParticles.gameObject.SetActive(false);
     }
@@ -73,7 +73,6 @@ public class Player : MonoBehaviour
         {
             Missile missile = collision.gameObject.GetComponent<Missile>();
             SetCurrentHP(Mathf.Max(0, _currentHP - missile.DamageHP));
-            missile.OnHit();
             if (_currentHP <= 0)
             {
                 gameObject.SetActive(false);
@@ -83,6 +82,7 @@ public class Player : MonoBehaviour
             {
                 _hitParticles.Play((collision.transform.position + transform.position) / 2f);
             }
+            missile.OnHit();
         }
     }
 

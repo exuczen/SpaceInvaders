@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ObjectPoolHandler<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class ObjectPoolHandler<T> : MonoBehaviour where T : PoolObject
 {
     [SerializeField]
     protected T _prefab = default;
@@ -45,8 +45,7 @@ public abstract class ObjectPoolHandler<T> : MonoBehaviour where T : MonoBehavio
         }
         foreach (Transform child in children)
         {
-            child.SetParent(_pool, false);
-            child.gameObject.SetActive(false);
+            child.GetComponent<T>().MoveToPool(_pool);
         }
     }
 }

@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class HitParticles : MonoBehaviour
+public class HitParticles : PoolObject
 {
-    protected Transform _pool = default;
-
     private Vector3 _initialScale = default;
 
     public T CreateInPool<T>(Transform pool) where T : HitParticles
     {
-        T hitParticles = Instantiate(this as T, pool);
+        T hitParticles = Create<T>(pool);
         hitParticles._pool = pool;
-        hitParticles._initialScale = hitParticles.transform.localScale;
         return hitParticles;
     }
 
-    public T Create<T>(Vector3 position, Transform parent) where T : HitParticles
+    public T Create<T>(Transform parent) where T : HitParticles
     {
         T hitParticles = Instantiate(this as T, parent);
-        hitParticles.transform.position = position;
+        hitParticles.transform.localPosition = Vector3.zero;
         hitParticles._initialScale = hitParticles.transform.localScale;
         return hitParticles;
     }
@@ -32,10 +29,8 @@ public class HitParticles : MonoBehaviour
         GetComponent<ParticleSystem>().Play();
     }
 
-    public void Set(Vector3 position, Color color, float scaleFactor)
+    public void SetScaleFactor(float scaleFactor)
     {
-        SetColor(color);
-        transform.position = position;
         transform.localScale = scaleFactor * _initialScale;
     }
 
@@ -47,11 +42,19 @@ public class HitParticles : MonoBehaviour
 
     protected virtual void OnParticleSystemStopped()
     {
-        gameObject.SetActive(false);
         if (_pool)
         {
-            transform.localScale = _initialScale;
-            transform.SetParent(_pool, false);
+            MoveToPool();
         }
+        else
+        {
+            transform.localScale = _initialScale;
+            gameObject.SetActive(false);
+        }
+    }
+
+    protected override void OnMoveToPool()
+    {
+        transform.localScale = _initialScale;
     }
 }

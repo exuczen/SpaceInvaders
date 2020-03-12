@@ -7,7 +7,8 @@ public class EnemyParticlesHandler : ObjectPoolHandler<HitParticles>
     private void StartHitParticles(Vector3 position, Color color, float scaleFactor)
     {
         HitParticles explosion = GetObjectFromPool();
-        explosion.Set(position, color, scaleFactor);
+        explosion.SetColor(color);
+        explosion.SetScaleFactor(scaleFactor);
         explosion.Play(position);
     }
 
