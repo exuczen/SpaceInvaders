@@ -20,8 +20,10 @@ public class GameScreen : ScreenScript
     {
         _pauseButton.onClick.AddListener(() => {
             _pauseButton.enabled = false;
-            GameManager.Instance.PauseGame(() => {
+            GameManager.Instance.SetGameActive(false);
+            Canvas.AlertPopup.ShowWithConfirmButton("Press OK to resume the game", () => {
                 _pauseButton.enabled = true;
+                GameManager.Instance.SetGameActive(true);
             });
         });
     }

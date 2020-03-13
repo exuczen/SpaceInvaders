@@ -25,15 +25,6 @@ public class GameManager : Singleton<GameManager>
         SetGameActive(false);
     }
 
-    public void PauseGame(Action onResume)
-    {
-        SetGameActive(false);
-        _gameCanvas.AlertPopup.ShowWithConfirmButton("Press OK to resume the game", () => {
-            SetGameActive(true);
-            onResume?.Invoke();
-        });
-    }
-
     private IEnumerator FailRoutine()
     {
         SetGameActive(false);
