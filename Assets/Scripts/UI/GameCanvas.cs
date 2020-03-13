@@ -46,17 +46,7 @@ public class GameCanvas : CanvasScript
     {
         _enemySwarm.SetViewSize(_camera, _backgroundSprite);
         _player.ViewSize = _enemySwarm.ViewSize;
-        SetGameScreenAnchors(_enemySwarm.ViewSize);
-    }
-
-    private void SetGameScreenAnchors(Vector2 viewSize)
-    {
-        Vector2 cameraSize = new Vector2(2f * _camera.orthographicSize * _camera.aspect, 2f * _camera.orthographicSize);
-        Vector2 normalizedViewSize = viewSize / cameraSize;
-        RectTransform screenRect = _gameScreen.transform as RectTransform;
-        Vector2 anchorOffset = (Vector2.one - normalizedViewSize) / 2f;
-        screenRect.anchorMin = anchorOffset;
-        screenRect.anchorMax = Vector2.one - anchorOffset;
+        _gameScreen.SetAnchors(_camera, _enemySwarm.ViewSize);
     }
 
     protected override void OnAppAwake(bool active)

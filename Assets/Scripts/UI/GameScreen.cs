@@ -28,6 +28,16 @@ public class GameScreen : ScreenScript
         });
     }
 
+    public void SetAnchors(Camera camera, Vector2 viewSize)
+    {
+        Vector2 cameraSize = new Vector2(2f * camera.orthographicSize * camera.aspect, 2f * camera.orthographicSize);
+        Vector2 normalizedViewSize = viewSize / cameraSize;
+        RectTransform rectTransform = transform as RectTransform;
+        Vector2 anchorOffset = (Vector2.one - normalizedViewSize) / 2f;
+        rectTransform.anchorMin = anchorOffset;
+        rectTransform.anchorMax = Vector2.one - anchorOffset;
+    }
+
     public void SetPlayerHealthText(int hp)
     {
         _playerHealthText.text = hp.ToString();
