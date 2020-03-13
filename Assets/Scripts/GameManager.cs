@@ -16,15 +16,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private int _level = 1;
 
-    protected override void OnAwake()
-    {
-        _player.setPlayerHeathText = _gameCanvas.GameScreen.SetPlayerHealthText;
-    }
+    public int Level { get => _level; }
 
     public void InitGame()
     {
-        _gameCanvas.AlertPopup.SetQuitWarningActions(() => { SetGameActive(false); }, () => { SetGameActive(true); });
-        _gameCanvas.GameScreen.SetLevelText(_level);
         _enemySwarm.Initialize();
         _enemySwarm.ResetSwarm(true, _level);
         SetGameActive(false);
@@ -54,13 +49,12 @@ public class GameManager : Singleton<GameManager>
     {
         SetGameActive(false);
         yield return new WaitForEndOfFrame();
+        _level++;
         _gameCanvas.ShowSuccessPopup(() => {
-            _level++;
             _enemySwarm.ResetSwarm(true, _level);
             _player.Restart();
-            _gameCanvas.GameScreen.SetLevelText(_level);
             SetGameActive(true);
-        });
+        }, _level);
     }
 
     public void StartFailRoutine()
@@ -76,8 +70,8 @@ public class GameManager : Singleton<GameManager>
     public void SetGameActive(bool active)
     {
         _enemySwarm.enabled = active;
-        _player.enabled = active;
         _enemySwarm.MissileHandler.SetMissilesSimulated(active);
+        _player.enabled = active;
         _player.MissileHandler.SetMissilesSimulated(active);
         if (!active)
         {

@@ -61,7 +61,11 @@ public class GameCanvas : CanvasScript
 
     protected override void OnAppAwake(bool active)
     {
+        _player.setPlayerHeathText = _gameScreen.SetPlayerHealthText;
+
         ShowScreen(_splashScreen, false, false);
+
+        AlertPopup.SetQuitWarningActions(() => { GameManager.Instance.SetGameActive(false); }, () => { GameManager.Instance.SetGameActive(true); });
     }
 
     public void ShowFailPopup(Action onRestartClick)
@@ -71,11 +75,13 @@ public class GameCanvas : CanvasScript
         ).Show();
     }
 
-    public void ShowSuccessPopup(Action onNextLevelClick)
+    public void ShowSuccessPopup(Action onNextLevelClick, int nextLevel)
     {
         AlertPopup.SetText("You won!!!").
-            SetButtons(ActionWithText.Create("Next Level", onNextLevelClick)
+            SetButtons(ActionWithText.Create("Next Level", () => {
+                _gameScreen.SetLevelText(nextLevel);
+                onNextLevelClick();
+            })
         ).Show();
     }
-
 }

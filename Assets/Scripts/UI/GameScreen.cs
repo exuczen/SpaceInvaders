@@ -38,6 +38,7 @@ public class GameScreen : ScreenScript
 
     protected override void OnShow()
     {
+        SetLevelText(GameManager.Instance.Level);
         Canvas.AlertPopup.ShowWithConfirmButton("Start the game!", () => {
             GameManager.Instance.SetGameActive(true);
         });
