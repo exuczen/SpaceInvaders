@@ -10,7 +10,7 @@ public class EnemySwarm : EnemyGrid
     [SerializeField]
     private float _horizontalSpeed = 1f;
 
-    private MissileHandler _missileHandler = default;
+    private EnemyMissileHandler _missileHandler = default;
     private EnemiesHandler _enemiesHandler = default;
     private EnemyParticlesHandler _explosionHandler = default;
 
@@ -23,11 +23,11 @@ public class EnemySwarm : EnemyGrid
     private Vector2 _swarmSize = default;
     private Vector2 _velocity = default;
 
-    public MissileHandler MissileHandler { get => _missileHandler; }
+    public MissileHandler<Missile> MissileHandler { get => _missileHandler; }
 
     public void Initialize()
     {
-        _missileHandler = GetComponent<MissileHandler>();
+        _missileHandler = GetComponent<EnemyMissileHandler>();
         _explosionHandler = GetComponent<EnemyParticlesHandler>();
         _enemiesHandler = GetComponent<EnemiesHandler>();
         _enemiesHandler.Initialize(_grid);
@@ -50,7 +50,7 @@ public class EnemySwarm : EnemyGrid
 
     public void ClearMissileContainer()
     {
-        _missileHandler.ClearContainer();
+        _missileHandler.ClearContainers();
     }
 
     public void StartShooting()
@@ -177,9 +177,9 @@ public class EnemySwarm : EnemyGrid
             ClearArray();
         }
 
-        _missileHandler.ClearContainer();
+        _missileHandler.ClearContainers();
         _enemiesHandler.ClearContainers();
-        _explosionHandler.ClearContainer();
+        _explosionHandler.ClearContainers();
 
         _enemiesHandler.FillEnemyGrid(this, _array, _arrayOffset, _colsCount, _rowsCount, !isNextLevel);
 

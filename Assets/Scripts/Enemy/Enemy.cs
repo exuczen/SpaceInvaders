@@ -43,7 +43,7 @@ public class Enemy : PoolObject
         transform.localPosition = Vector3.zero;
     }
 
-    public void StartShooting(MissileHandler handler, float shotIntervalFactor)
+    public void StartShooting(EnemyMissileHandler handler, float shotIntervalFactor)
     {
         _missileLauncher.StartShooting(handler, this, shotIntervalFactor);
     }

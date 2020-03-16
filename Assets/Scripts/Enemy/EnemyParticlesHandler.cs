@@ -22,11 +22,8 @@ public class EnemyParticlesHandler : ObjectPoolHandler<HitParticles>
         StartHitParticles(position, color, 1f);
     }
 
-    protected override void FillPool(int count)
+    protected override void CreateObjectInstance(HitParticles prefab, Transform pool)
     {
-        for (int i = 0; i < count; i++)
-        {
-            _prefab.CreateInPool<HitParticles>(_pool);
-        }
+        prefab.CreateInPool<HitParticles>(pool);
     }
 }

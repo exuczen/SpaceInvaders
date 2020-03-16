@@ -3,17 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMissileHandler : MissileHandler
+public class PlayerMissileHandler : MissileHandler<PlayerMissile>
 {
     [SerializeField]
     private EnemySwarm _enemySwarm = default;
 
-    protected override void FillPool(int count)
+    protected override void CreateObjectInstance(PlayerMissile prefab, Transform pool)
     {
-        PlayerMissile prefab = _prefab as PlayerMissile;
-        for (int i = 0; i < count; i++)
-        {
-            prefab.Create(_pool, _enemySwarm);
-        }
+        prefab.Create(pool, _enemySwarm);
     }
 }

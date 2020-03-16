@@ -15,9 +15,9 @@ public class MissileLauncher : MonoBehaviour
         transform.DestroyAllChildren();
     }
 
-    public void Shoot(MissileHandler _handler, float speed, int damageHP)
+    public void Shoot<T>(MissileHandler<T> handler, float speed, int damageHP) where T : Missile
     {
-        Missile missile = _handler.GetObjectFromPool();
+        Missile missile = handler.GetObjectFromPool();
         missile.SetSpriteColor(_missileColor);
         missile.Launch(transform.position, speed, damageHP);
     }

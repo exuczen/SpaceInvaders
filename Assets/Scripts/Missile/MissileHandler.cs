@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileHandler : ObjectPoolHandler<Missile>
+public class MissileHandler<T> : ObjectPoolHandler<T> where T : Missile
 {
-    protected override void FillPool(int count)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            _prefab.Create<Missile>(_pool);
-        }
-    }
-
     public void SetMissilesSimulated(bool value)
     {
-        foreach (Transform child in _container)
+        foreach (Transform child in _containers[0])
         {
             child.GetComponent<Missile>().Rigidbody.simulated = value;
         }
+    }
+
+    protected override void CreateObjectInstance(T prefab, Transform pool)
+    {
+        prefab.Create<T>(pool);
     }
 }

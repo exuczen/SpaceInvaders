@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     private Vector2 _viewSize = default;
 
-    private MissileHandler _missileHandler = default;
+    private PlayerMissileHandler _missileHandler = default;
 
     private SpriteRenderer _sprite = default;
 
@@ -32,12 +32,12 @@ public class Player : MonoBehaviour
 
     public Action<int> setPlayerHeathText = default;
 
-    public MissileHandler MissileHandler { get => _missileHandler; }
+    public PlayerMissileHandler MissileHandler { get => _missileHandler; }
     public Vector2 ViewSize { get => _viewSize; set => _viewSize = value; }
 
     private void Awake()
     {
-        _missileHandler = GetComponent<MissileHandler>();
+        _missileHandler = GetComponent<PlayerMissileHandler>();
         _sprite = GetComponent<SpriteRenderer>();
         _explosion = _explosionPrefab.Create<PlayerExplosion>(transform.parent);
         _hitParticles = _hitParticlesPrefab.Create<HitParticles>(transform.parent);
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         gameObject.SetActive(true);
         transform.localPosition = Vector3.zero;
 
-        _missileHandler.ClearContainer();
+        _missileHandler.ClearContainers();
 
         SetCurrentHP(_healthPoints);
     }

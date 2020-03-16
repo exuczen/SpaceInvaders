@@ -1,51 +1,74 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class ObjectPoolHandler<T> : MonoBehaviour where T : PoolObject
 {
     [SerializeField]
-    protected T _prefab = default;
+    protected bool _fillPoolsOnAwake = true;
     [SerializeField]
-    protected Transform _pool = default;
+    protected T[] _prefabs = default;
     [SerializeField]
-    protected Transform _container = default;
+    protected Transform[] _pools = default;
+    [SerializeField]
+    protected Transform[] _containers = default;
 
     public const int POOL_INIT_CAPACITY = 50;
     public const int POOL_DELTA_CAPACITY = 5;
 
-    public Transform Container { get => _container; }
-    public Transform Pool { get => _pool; }
-
     private void Awake()
     {
-        FillPool(POOL_INIT_CAPACITY);
+        if (_fillPoolsOnAwake)
+        {
+            for (int i = 0; i < _prefabs.Length; i++)
+            {
+                FillPool(i, POOL_INIT_CAPACITY);
+            }
+        }
     }
 
-    protected abstract void FillPool(int count);
+    protected abstract void CreateObjectInstance(T prefab, Transform pool);
 
-    public T GetObjectFromPool()
+    protected void FillPool(int poolIndex, int count)
     {
-        if (_pool.childCount == 0)
+        Transform pool = _pools[poolIndex];
+        T prefab = _prefabs[poolIndex];
+        for (int j = 0; j < count; j++)
         {
-            FillPool(POOL_DELTA_CAPACITY);
+            CreateObjectInstance(prefab, pool);
         }
-        T child = _pool.GetChild(_pool.childCount - 1).GetComponent<T>();
-        child.transform.SetParent(_container, false);
+    }
+
+    public T GetObjectFromPool(int poolIndex = 0)
+    {
+        Transform pool = _pools[poolIndex];
+        Transform container = _containers[poolIndex];
+        if (pool.childCount == 0)
+        {
+            FillPool(poolIndex, POOL_DELTA_CAPACITY);
+        }
+        T child = pool.GetChild(pool.childCount - 1).GetComponent<T>();
+        child.transform.SetParent(container, false);
         child.gameObject.SetActive(true);
         return child;
     }
 
-    public void ClearContainer()
+    public void ClearContainers()
     {
-        Transform[] children = new Transform[_container.childCount];
-        for (int j = 0; j < _container.childCount; j++)
+        for (int i = 0; i < _containers.Length; i++)
         {
-            children[j] = _container.GetChild(j);
-        }
-        foreach (Transform child in children)
-        {
-            child.GetComponent<T>().MoveToPool(_pool);
+            Transform pool = _pools[i];
+            Transform container = _containers[i];
+            Transform[] children = new Transform[container.childCount];
+            for (int j = 0; j < container.childCount; j++)
+            {
+                children[j] = container.GetChild(j);
+            }
+            foreach (Transform child in children)
+            {
+                child.GetComponent<T>().MoveToPool(pool);
+            }
         }
     }
 }
