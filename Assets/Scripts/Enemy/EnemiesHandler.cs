@@ -1,4 +1,5 @@
-﻿using MustHave.Utilities;
+﻿using MustHave.DesignPatterns;
+using MustHave.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

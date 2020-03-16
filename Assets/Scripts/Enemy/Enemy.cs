@@ -1,4 +1,5 @@
-﻿using MustHave.UI;
+﻿using MustHave.DesignPatterns;
+using MustHave.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
