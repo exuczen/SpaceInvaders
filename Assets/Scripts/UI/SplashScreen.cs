@@ -8,7 +8,6 @@ public class SplashScreen : ScreenScript
 {
     public void ShowGameScreen()
     {
-        GameManager.Instance.InitGame();
         this.StartCoroutineActionAfterFrames(() => {
             Canvas.ShowScreen<GameScreen>();
         }, 1);

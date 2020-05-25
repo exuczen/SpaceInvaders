@@ -12,28 +12,35 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private Player _player = default;
     [SerializeField]
-    private GameCanvas _gameCanvas = default;
-    [SerializeField]
     private int _level = 1;
+
+    private Action<Action, int> _onFail = default;
+    private Action<Action, int> _onSuccess = default;
 
     public int Level { get => _level; }
 
-    public void InitGame()
+    protected override void OnAwake()
     {
         _enemySwarm.Initialize();
         _enemySwarm.ResetSwarm(true, _level);
         SetGameActive(false);
     }
 
+    public void SetResultCallbacks(Action<Action, int> onSuccess, Action<Action, int> onFail)
+    {
+        _onSuccess = onSuccess;
+        _onFail = onFail;
+    }
+
     private IEnumerator FailRoutine()
     {
         SetGameActive(false);
         yield return new WaitForEndOfFrame();
-        _gameCanvas.ShowFailPopup(() => {
+        _onFail?.Invoke(() => {
             _enemySwarm.ResetSwarm(false, _level);
             _player.Restart();
             SetGameActive(true);
-        });
+        }, _level);
     }
 
     private IEnumerator SuccessRoutine()
@@ -41,7 +48,7 @@ public class GameManager : Singleton<GameManager>
         SetGameActive(false);
         yield return new WaitForEndOfFrame();
         _level++;
-        _gameCanvas.ShowSuccessPopup(() => {
+        _onSuccess?.Invoke(() => {
             _enemySwarm.ResetSwarm(true, _level);
             _player.Restart();
             SetGameActive(true);

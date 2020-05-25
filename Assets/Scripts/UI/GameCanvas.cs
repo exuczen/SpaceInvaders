@@ -42,23 +42,22 @@ public class GameCanvas : CanvasScript
         }
     }
 
-    private void SetGameViewSize()
-    {
-        _enemySwarm.SetViewSize(_camera, _backgroundSprite);
-        _player.ViewSize = _enemySwarm.ViewSize;
-        _gameScreen.SetAnchors(_camera, _enemySwarm.ViewSize);
-    }
-
     protected override void OnAppAwake(bool active)
     {
         _player.setPlayerHeathText = _gameScreen.SetPlayerHealthText;
 
-        ShowScreen(_splashScreen, false, false);
+        AlertPopup.SetQuitWarningActions(() => {
+            GameManager.Instance.SetGameActive(false);
+        }, () => {
+            GameManager.Instance.SetGameActive(true);
+        });
 
-        AlertPopup.SetQuitWarningActions(() => { GameManager.Instance.SetGameActive(false); }, () => { GameManager.Instance.SetGameActive(true); });
+        GameManager.Instance.SetResultCallbacks(ShowSuccessPopup, ShowFailPopup);
+
+        ShowScreen(_splashScreen, false, false);
     }
 
-    public void ShowFailPopup(Action onRestartClick)
+    public void ShowFailPopup(Action onRestartClick, int level)
     {
         AlertPopup.SetText("You failed. Restart the game.").
             SetButtons(ActionWithText.Create("Restart", onRestartClick)
@@ -73,5 +72,12 @@ public class GameCanvas : CanvasScript
                 onNextLevelClick();
             })
         ).Show();
+    }
+
+    private void SetGameViewSize()
+    {
+        _enemySwarm.SetViewSize(_camera, _backgroundSprite);
+        _player.ViewSize = _enemySwarm.ViewSize;
+        _gameScreen.SetAnchors(_camera, _enemySwarm.ViewSize);
     }
 }
